@@ -1,0 +1,23 @@
+{
+  "name": "node-graphql-demo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon --exec ts-node src/index.ts"
+  },
+  "author": "Avi Peretz",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.26",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@graphql-tools/schema": "^10.0.3",
+    "graphql": "^16.8.1",
+    "graphql-import-node": "^0.0.5"
+  }
+}
