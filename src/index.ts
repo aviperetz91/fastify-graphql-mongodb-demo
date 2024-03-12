@@ -1,16 +1,27 @@
 import 'graphql-import-node';
-import { execute, parse } from 'graphql';
+import fastify from 'fastify';
+import mercurius from 'mercurius';
 import { schema } from './schema';
 
 async function main() {
-  const myQuery = parse(`query { info }`);
+  const server = fastify({ logger: true });
 
-  const result = await execute({
-    schema,
-    document: myQuery,
+  server.get('/', (req, reply) => {
+    reply.send({ test: true });
   });
 
-  console.log(result);
+  server.register(mercurius, {
+    path: '/graphql',
+    schema: schema,
+    graphiql: true,
+  });
+
+  try {
+    await server.listen({ port: 3000 });
+  } catch (error) {
+    server.log.error(error);
+    process.exit(1);
+  }
 }
 
 main();
