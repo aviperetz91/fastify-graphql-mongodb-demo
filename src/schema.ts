@@ -8,26 +8,32 @@ type Link = {
   description: string;
 };
 
-function getLinks(): Link[] {
-  return [
-    {
-      id: '1',
-      url: 'www.sample.com',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    },
-  ];
-}
+const links: Link[] = [
+  {
+    id: 'link-0',
+    url: 'www.sample.com',
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+  },
+];
 
 const resolvers = {
   Query: {
     info: () => `This is A GraphQL-Fastify server`,
-    feed: () => getLinks(),
+    feed: () => links,
   },
 
-  Link: {
-    id: (parent: Link) => parent.id,
-    description: (parent: Link) => parent.description,
-    url: (parent: Link) => parent.url,
+  Mutation: {
+    post: (parent: unknown, args: { description: string; url: string }) => {
+      let idCount = links.length;
+      const link: Link = {
+        id: `link-${idCount++}`,
+        description: args.description,
+        url: args.url,
+      };
+
+      links.push(link);
+      return link;
+    },
   },
 };
 
