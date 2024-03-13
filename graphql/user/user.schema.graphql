@@ -1,0 +1,20 @@
+type Address {
+  city: String!
+  street: String!
+  floor: Int
+  apartment: Int
+  zipCode: String
+}
+
+type User {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  image: String
+  addresses: [Address!]!
+}
+
+type Query {
+  users: [User!]!
+}

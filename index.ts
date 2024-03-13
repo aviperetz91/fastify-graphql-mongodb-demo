@@ -1,7 +1,16 @@
 import 'graphql-import-node';
 import fastify from 'fastify';
-// import mercurius from 'mercurius';
+import mercurius from 'mercurius';
 import connectDB from './configuration/database';
+// @ts-ignore
+import userSchema from './graphql/user/user.schema.graphql';
+import { userResolvers } from './graphql/user/user.resolvers';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+
+const user = makeExecutableSchema({
+  typeDefs: userSchema,
+  resolvers: userResolvers,
+});
 
 async function main() {
   await connectDB();
@@ -12,11 +21,11 @@ async function main() {
     reply.send({ test: true });
   });
 
-  // server.register(mercurius, {
-  //   path: '/graphql',
-  //   schema: ,
-  //   graphiql: true,
-  // });
+  server.register(mercurius, {
+    path: '/graphql',
+    schema: user,
+    graphiql: true,
+  });
 
   try {
     await server.listen({ port: 3000 });
