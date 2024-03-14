@@ -15,7 +15,7 @@ interface User {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
+  phoneNumber: string;
   image?: string;
   addresses: Address[];
 }
@@ -40,7 +40,7 @@ export const insertUsers = async () => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        password: user.password,
+        phoneNumber: user.phone,
         image: user.image,
         addresses: [address],
       };

@@ -3,8 +3,8 @@ import fastify from 'fastify';
 import mercurius from 'mercurius';
 import connectDB from './configuration/database';
 // @ts-ignore
-import userSchema from './graphql/user/user.schema.graphql';
-import { userResolvers } from './graphql/user/user.resolvers';
+import userSchema from './graphql/schemas/user.schema.graphql';
+import { userResolvers } from './graphql/resolvers/user.resolvers';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
 const user = makeExecutableSchema({

@@ -7,14 +7,16 @@ type Address {
 }
 
 type User {
+  id: ID!
   firstName: String!
   lastName: String!
   email: String!
-  password: String!
+  phoneNumber: String!
   image: String
   addresses: [Address!]!
 }
 
 type Query {
   users: [User!]!
+  user(id: String!): User
 }

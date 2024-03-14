@@ -40,7 +40,7 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    password: {
+    phoneNumber: {
       type: String,
       required: true,
     },
