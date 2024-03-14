@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ts-node index.ts",
     "dev": "nodemon --exec ts-node index.ts",
-    "insertUsers": "ts-node scripts/insertUsers.ts"
+    "insertUsers": "ts-node scripts/insertUsers.ts",
+    "insertPosts": "ts-node scripts/insertPosts.ts"
   },
   "author": "Avi Peretz",
   "license": "ISC",

@@ -2,14 +2,18 @@ import 'graphql-import-node';
 import fastify from 'fastify';
 import mercurius from 'mercurius';
 import connectDB from './configuration/database';
+
 // @ts-ignore
 import userSchema from './graphql/schemas/user.schema.graphql';
-import { userResolvers } from './graphql/resolvers/user.resolvers';
+import postSchema from './graphql/schemas/post.schema.graphql';
+
+import userResolvers from './graphql/resolvers/user.resolvers';
+import postResolvers from './graphql/resolvers/post.resolvers';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
-const user = makeExecutableSchema({
-  typeDefs: userSchema,
-  resolvers: userResolvers,
+const mergedSchema = makeExecutableSchema({
+  typeDefs: [userSchema, postSchema],
+  resolvers: [userResolvers, postResolvers],
 });
 
 async function main() {
@@ -23,7 +27,7 @@ async function main() {
 
   server.register(mercurius, {
     path: '/graphql',
-    schema: user,
+    schema: mergedSchema,
     graphiql: true,
   });
 

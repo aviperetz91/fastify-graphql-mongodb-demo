@@ -5,7 +5,7 @@ import { IUser } from '../../models/user.model';
 
 const userController = new UserController();
 
-export const userResolvers = {
+const userResolvers = {
   Query: {
     users: async (parent: any, args: any, context: Context, info: GraphQLResolveInfo): Promise<IUser[]> => {
       const users: IUser[] = await userController.getUsers(args, context);
@@ -24,3 +24,5 @@ export const userResolvers = {
     },
   },
 };
+
+export default userResolvers;
