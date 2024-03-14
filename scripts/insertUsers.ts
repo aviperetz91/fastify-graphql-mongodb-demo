@@ -1,24 +1,7 @@
 import axios from 'axios';
-import User from '../models/user.model';
+import User, { IUser, IAddress } from '../models/user.model';
 import connectDB from '../configuration/database';
 import { DUMMY_USERS_URI } from '../configuration/consts';
-
-interface Address {
-  city: string;
-  street: string;
-  floor?: number;
-  apartment?: number;
-  zipCode?: string;
-}
-
-interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  image?: string;
-  addresses: Address[];
-}
 
 export const insertUsers = async () => {
   try {
@@ -26,17 +9,17 @@ export const insertUsers = async () => {
     await User.deleteMany();
     const usersRes = await axios.get(DUMMY_USERS_URI as string);
     const usersObj = usersRes.data;
-    const usersToDB: User[] = [];
+    const usersToDB: IUser[] = [];
 
     for (const user of usersObj.users) {
-      const address: Address = {
+      const address: IAddress = {
         city: user.address.city,
         street: user.address.address,
         zipCode: user.address.postalCode,
         floor: 1,
         apartment: 1,
       };
-      const newUser: User = {
+      const newUser: IUser = {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,

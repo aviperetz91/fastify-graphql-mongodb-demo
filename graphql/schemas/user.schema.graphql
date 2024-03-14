@@ -20,3 +20,24 @@ type Query {
   users: [User!]!
   user(id: String!): User
 }
+
+input AddressInput {
+  city: String!
+  street: String!
+  floor: Int
+  apartment: Int
+  zipCode: String
+}
+
+input UserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  phoneNumber: String!
+  image: String
+  addresses: [AddressInput!]!
+}
+
+type Mutation {
+  createUser(input: UserInput!): User!
+}
