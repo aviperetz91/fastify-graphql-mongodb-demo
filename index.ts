@@ -4,16 +4,17 @@ import mercurius from 'mercurius';
 import connectDB from './configuration/database';
 
 // @ts-ignore
-import userSchema from './graphql/schemas/user.schema.graphql';
 import postSchema from './graphql/schemas/post.schema.graphql';
+import authSchema from './graphql/schemas/auth.schema.graphql';
 
-import userResolvers from './graphql/resolvers/user.resolvers';
 import postResolvers from './graphql/resolvers/post.resolvers';
+import authResolvers from './graphql/resolvers/auth.resolvers';
+
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
 const mergedSchema = makeExecutableSchema({
-  typeDefs: [userSchema, postSchema],
-  resolvers: [userResolvers, postResolvers],
+  typeDefs: [authSchema, postSchema],
+  resolvers: [authResolvers, postResolvers],
 });
 
 async function main() {
@@ -29,6 +30,9 @@ async function main() {
     path: '/graphql',
     schema: mergedSchema,
     graphiql: true,
+    context: async (request, reply) => {
+      return { request, reply };
+    },
   });
 
   try {

@@ -12,9 +12,15 @@ export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
-  phoneNumber: string;
+  password: string;
+  phoneNumber?: string;
   image?: string;
-  addresses: IAddress[];
+  addresses?: IAddress[];
+}
+
+export interface IAuthData {
+  token: string;
+  userId: string;
 }
 
 const addressSchema = new Schema<IAddress>({
@@ -29,7 +35,8 @@ const userSchema = new Schema<IUser>({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
+  password: { type: String, required: true },
+  phoneNumber: { type: String },
   image: { type: String },
   addresses: [addressSchema],
 });

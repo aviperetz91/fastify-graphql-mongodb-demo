@@ -11,14 +11,10 @@ type User {
   firstName: String!
   lastName: String!
   email: String!
-  phoneNumber: String!
+  password: String!
+  phoneNumber: String
   image: String
-  addresses: [Address!]!
-}
-
-type Query {
-  users: [User!]!
-  user(id: String!): User
+  addresses: [Address]
 }
 
 input AddressInput {
@@ -33,11 +29,21 @@ input UserInput {
   firstName: String!
   lastName: String!
   email: String!
-  phoneNumber: String!
+  password: String!
+  phoneNumber: String
   image: String
-  addresses: [AddressInput!]!
+  addresses: [AddressInput]
+}
+
+type AuthData {
+  token: String!
+  userId: String!
 }
 
 type Mutation {
-  createUser(input: UserInput!): User!
+  signup(input: UserInput!): User!
+}
+
+type Query {
+  login(email: String!, password: String!): AuthData!
 }

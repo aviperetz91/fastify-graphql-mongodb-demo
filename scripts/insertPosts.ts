@@ -1,12 +1,13 @@
 import axios from 'axios';
 import Post, { IPost } from '../models/post.model';
 import connectDB from '../configuration/database';
-import { DUMMY_POSTS_URI } from '../configuration/consts';
+import { DUMMY_POSTS_URI } from '../configuration/constants';
 
 export const insertPosts = async () => {
   try {
     await connectDB();
     await Post.deleteMany();
+    console.log('Posts have been deleted');
     const postsRes = await axios.get(DUMMY_POSTS_URI as string);
     const postsObj = postsRes.data;
     const postsToDB: IPost[] = [];
@@ -15,7 +16,7 @@ export const insertPosts = async () => {
       const newPost: IPost = {
         title: post.title,
         body: post.body,
-        userId: post.userId,
+        userId: post.userId.toString(),
         tags: post.tags,
         reactions: post.reactions,
       };

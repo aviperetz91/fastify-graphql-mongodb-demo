@@ -1,12 +1,13 @@
 import axios from 'axios';
 import User, { IUser, IAddress } from '../models/user.model';
 import connectDB from '../configuration/database';
-import { DUMMY_USERS_URI } from '../configuration/consts';
+import { DUMMY_USERS_URI } from '../configuration/constants';
 
 export const insertUsers = async () => {
   try {
     await connectDB();
     await User.deleteMany();
+    console.log('Users have been deleted');
     const usersRes = await axios.get(DUMMY_USERS_URI as string);
     const usersObj = usersRes.data;
     const usersToDB: IUser[] = [];
@@ -23,6 +24,7 @@ export const insertUsers = async () => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        password: user.password,
         phoneNumber: user.phone,
         image: user.image,
         addresses: [address],
