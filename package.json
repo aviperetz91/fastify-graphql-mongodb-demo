@@ -1,5 +1,5 @@
 {
-  "name": "node-graphql-demo",
+  "name": "fastify-graphql-mongodb-demo",
   "version": "1.0.0",
   "description": "",
   "scripts": {

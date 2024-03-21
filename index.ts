@@ -22,7 +22,7 @@ async function main() {
 
   const server = fastify({ logger: true });
 
-  server.get('/', (req, reply) => {
+  server.get('/', (request, reply) => {
     reply.send({ test: true });
   });
 

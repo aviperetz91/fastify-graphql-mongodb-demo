@@ -8,11 +8,11 @@ const postController = new PostController();
 
 const postResolvers = {
   Query: {
-    posts: async (parent: any, args: { userId: number }, context: Context, info: GraphQLResolveInfo): Promise<IPost[]> => {
+    posts: async (parent: any, args: any, context: Context, info: GraphQLResolveInfo): Promise<IPost[]> => {
       const posts: IPost[] = await postController.getAllPosts(args);
       return posts;
     },
-    userPosts: async (parent: any, args: { userId: number }, context: Context, info: GraphQLResolveInfo): Promise<IPost[]> => {
+    userPosts: async (parent: any, args: { userId: string }, context: Context, info: GraphQLResolveInfo): Promise<IPost[]> => {
       const posts: IPost[] = await postController.getPostsByUserId(args.userId);
       return posts;
     },

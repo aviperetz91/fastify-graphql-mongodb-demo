@@ -10,7 +10,7 @@ export class PostController {
       throw new Error('Failed to fetch posts');
     }
   }
-  async getPostsByUserId(userId: number) {
+  async getPostsByUserId(userId: string) {
     try {
       const posts = await Post.find({ userId });
       return posts;
